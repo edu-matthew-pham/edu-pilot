@@ -24,7 +24,6 @@ if TYPE_CHECKING:
     from core.agents.base import BaseAgent
 
 log = get_logger(__name__)
-logger = get_logger(__name__)
 
 
 class StateManager:
@@ -50,7 +49,6 @@ class StateManager:
         self.next_state = None
         self.current_session = None
         self.blockDb = False
-        self.is_programming = False  # Add this line
 
     @asynccontextmanager
     async def db_blocker(self):
@@ -240,7 +238,7 @@ class StateManager:
 
             # Having a shorter-lived sessions is considered a good practice in SQLAlchemy,
             # so we close and recreate the session for each state. This uses db
-            # connection from a connection pool, so it's fast. Note that SQLite uses
+            # connection from a connection pool, so it is fast. Note that SQLite uses
             # no connection pool by default because it's all in-process so it's fast anyway.
             self.current_session.expunge_all()
             await self.session_manager.close()
@@ -602,14 +600,6 @@ class StateManager:
                 lines.append(i)
 
         return lines
-
-    async def set_topic_info(self, topic: str, is_programming: bool):
-        self.current_state.specification.description = topic
-        self.is_programming = is_programming
-        logger.debug(f"Topic set: {topic}, Is Programming: {is_programming}")
-
-    def get_is_programming(self) -> bool:
-        return self.is_programming
 
 
 __all__ = ["StateManager"]

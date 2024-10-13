@@ -5,7 +5,7 @@ import os.path
 import sys
 
 try:
-    from core.cli.main import run_pythagora
+    from edu.cli.main import run_pythagora
 except ImportError as err:
     pythagora_root = os.path.dirname(__file__)
     venv_path = os.path.join(pythagora_root, "venv")

@@ -1,7 +1,7 @@
 from copy import deepcopy
 from typing import TYPE_CHECKING, Optional
 
-from sqlalchemy import delete, distinct, select, Text
+from sqlalchemy import delete, distinct, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -40,8 +40,6 @@ class Specification(Base):
     # Relationships
     project_states: Mapped[list["ProjectState"]] = relationship(back_populates="specification", lazy="raise")
 
-    activity_plan: Mapped[Optional[str]] = mapped_column(Text)
-
     def clone(self) -> "Specification":
         """
         Clone the specification.
@@ -56,7 +54,6 @@ class Specification(Base):
             templates=deepcopy(self.templates) if self.templates else None,
             complexity=self.complexity,
             example_project=self.example_project,
-            activity_plan=self.activity_plan,  # Add this line
         )
         return clone
 
