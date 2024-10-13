@@ -1,11 +1,24 @@
 #!/usr/bin/env python
 
-
 import os.path
 import sys
 
+def get_user_choice():
+    while True:
+        choice = input("Choose mode (CLI/GUI): ").strip().lower()
+        if choice in ['cli', 'gui']:
+            return choice
+        print("Invalid choice. Please enter 'CLI' or 'GUI'.")
+
 try:
-    from edu.cli.main import run_pythagora
+    # Get user's choice
+    mode = get_user_choice()
+
+    # Choose between CLI and GUI based on user input
+    if mode == 'gui':
+        from edu.gui.main import run_pythagora
+    else:
+        from edu.cli.main import run_pythagora
 except ImportError as err:
     pythagora_root = os.path.dirname(__file__)
     venv_path = os.path.join(pythagora_root, "venv")

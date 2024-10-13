@@ -15,10 +15,10 @@ from core.db.setup import run_migrations
 from core.log import setup
 from core.state.state_manager import StateManager
 from core.ui.base import UIBase
-from core.ui.console import PlainConsoleUI
+
 from core.ui.ipc_client import IPCClientUI
 from core.ui.virtual import VirtualUI
-from core.ui.tkinter_ui import TkinterUI
+from edu.ui.tkinter_ui import TkinterUI
 
 
 def parse_llm_endpoint(value: str) -> Optional[tuple[LLMProvider, str]]:
@@ -306,7 +306,7 @@ def init() -> tuple[UIBase, SessionManager, Namespace]:
     Loads configuration, sets up logging and UI, initializes the database
     and runs database migrations.
 
-    :return: Tuple with UI, db session manager, file manager, and command-line arguments.
+    :return: Tuple with UI, db session manager, and command-line arguments.
     """
     args = parse_arguments()
     config = load_config(args)
@@ -315,12 +315,9 @@ def init() -> tuple[UIBase, SessionManager, Namespace]:
 
     setup(config.log, force=True)
 
-    if config.ui.type == UIAdapter.IPC_CLIENT:
-        ui = IPCClientUI(config.ui)
-    elif config.ui.type == UIAdapter.VIRTUAL:
-        ui = VirtualUI(config.ui.inputs)
-    else:
-        ui = PlainConsoleUI()
+    ui = TkinterUI()
+
+    print(f"UI type created in init: {type(ui).__name__}")  # Debug print
 
     run_migrations(config.db)
     db = SessionManager(config.db)
