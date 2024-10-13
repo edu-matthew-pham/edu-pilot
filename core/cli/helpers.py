@@ -18,7 +18,6 @@ from core.ui.base import UIBase
 from core.ui.console import PlainConsoleUI
 from core.ui.ipc_client import IPCClientUI
 from core.ui.virtual import VirtualUI
-from core.ui.tkinter_ui import TkinterUI
 
 
 def parse_llm_endpoint(value: str) -> Optional[tuple[LLMProvider, str]]:
