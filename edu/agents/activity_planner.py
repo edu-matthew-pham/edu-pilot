@@ -1,6 +1,6 @@
-from edu.agents.base import BaseAgent
-from edu.agents.convo import AgentConvo
-from edu.agents.response import AgentResponse
+from edu.agents.base import EduAgent
+from core.agents.convo import AgentConvo
+from core.agents.response import AgentResponse
 from core.llm.parser import StringParser
 from core.log import get_logger
 
@@ -8,7 +8,7 @@ ACTIVITY_PLANNER_AGENT_NAME = "activity_planner"
 
 logger = get_logger(__name__)
 
-class ActivityPlanner(BaseAgent):
+class ActivityPlanner(EduAgent):
     agent_type = "activity-planner"
     display_name = "Activity Planner"
 

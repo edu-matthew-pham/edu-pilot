@@ -1,5 +1,5 @@
-from edu.agents.base import BaseAgent
-from edu.agents.response import AgentResponse, ResponseType
+from edu.agents.base import EduAgent
+from core.agents.response import AgentResponse, ResponseType
 from edu.projects.python_turtle import PythonTurtleTemplate, PythonTurtleOptions
 from core.log import get_logger
 
@@ -7,7 +7,7 @@ import logging
 
 logger = get_logger(__name__)
 
-class ProjectStarter(BaseAgent):
+class ProjectStarter(EduAgent):
     agent_type = "project_starter"
     display_name = "Project Starter"
 

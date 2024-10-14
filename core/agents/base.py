@@ -17,8 +17,8 @@ class BaseAgent:
     Base class for agents.
     """
 
-    agent_type: str
-    display_name: str
+    agent_type: str = "base"
+    display_name: str = "Base Agent"
 
     def __init__(
         self,

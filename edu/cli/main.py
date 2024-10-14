@@ -3,8 +3,9 @@ import sys
 from argparse import Namespace
 from asyncio import run
 
+from edu.agents.base import EduAgent
 from edu.agents.orchestrator import Orchestrator
-from core.state.state_manager import StateManager
+from edu.state.edu_state_manager import EduStateManager as StateManager
 from core.cli.helpers import delete_project, init, list_projects, list_projects_json, load_project, show_config
 from core.config import LLMProvider, get_config
 from core.db.session import SessionManager
@@ -13,6 +14,7 @@ from core.llm.base import APIError, BaseLLMClient
 from core.log import get_logger
 from core.telemetry import telemetry
 from core.ui.base import UIBase, UIClosedError, UserInput, pythagora_source
+
 
 log = get_logger(__name__)
 
@@ -31,8 +33,9 @@ async def run_project(sm: StateManager, ui: UIBase) -> bool:
 
     telemetry.set("app_id", str(sm.project.id))
     telemetry.set("initial_prompt", sm.current_state.specification.description)
-
+    
     orca = Orchestrator(sm, ui)
+    
     success = False
     try:
         success = await orca.run()

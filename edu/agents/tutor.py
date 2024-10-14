@@ -1,4 +1,4 @@
-from core.agents.base import BaseAgent
+from edu.agents.base import EduAgent
 from core.agents.response import AgentResponse, ResponseType
 from core.agents.convo import AgentConvo
 from core.log import get_logger
@@ -7,7 +7,7 @@ from typing import List
 
 logger = get_logger(__name__)
 
-class Tutor(BaseAgent):
+class Tutor(EduAgent):
     agent_type = "tutor"
     display_name = "Tutor"
 

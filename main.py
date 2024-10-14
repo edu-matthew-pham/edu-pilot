@@ -2,6 +2,7 @@
 
 import os.path
 import sys
+import traceback
 
 def get_user_choice():
     while True:
@@ -40,6 +41,8 @@ except ImportError as err:
             f"Please run `{sys.executable} -m pip install -r {requirements_path}` to finish Python setup, and rerun Pythagora.",
             file=sys.stderr,
         )
+        print("\nFull traceback:", file=sys.stderr)
+        traceback.print_exc()
     sys.exit(255)
 
 sys.exit(run_pythagora())

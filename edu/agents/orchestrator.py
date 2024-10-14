@@ -1,11 +1,11 @@
 from typing import Optional
 
-from edu.agents.base import BaseAgent
-from edu.agents.error_handler import ErrorHandler
+from edu.agents.base import EduAgent
+from core.agents.error_handler import ErrorHandler
 from edu.agents.activity_planner import ActivityPlanner
 from edu.agents.tutor import Tutor
 from edu.agents.project_starter import ProjectStarter
-from edu.agents.response import AgentResponse, ResponseType
+from core.agents.response import AgentResponse, ResponseType
 from core.log import get_logger
 import logging
 
@@ -13,7 +13,7 @@ log = get_logger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-class Orchestrator(BaseAgent):
+class Orchestrator(EduAgent):
     """
     Simplified Orchestrator agent that runs a basic tutoring session.
     """
@@ -70,7 +70,7 @@ class Orchestrator(BaseAgent):
             'is_programming': topic_type.button == "programming"
         }
 
-    def create_agent(self) -> BaseAgent:
+    def create_agent(self) -> EduAgent:
         if not self.current_state.specification.activity_plan:
             logger.debug("Creating ActivityPlanner agent")
             return ActivityPlanner(self.state_manager, self.ui)
@@ -113,6 +113,6 @@ class Orchestrator(BaseAgent):
         logger.info("Running lesson (not implemented yet)")
         return True
 
-    def create_lesson_agent(self) -> BaseAgent:
+    def create_lesson_agent(self) -> EduAgent:
         # Implement this method to create the appropriate agent for conducting the lesson
         raise NotImplementedError("Lesson agent not implemented yet")

@@ -11,6 +11,7 @@ from sqlalchemy.sql import func
 
 from core.db.models import Base
 from core.log import get_logger
+from typing import List
 
 if TYPE_CHECKING:
     from core.db.models import Branch, ExecLog, File, FileContent, LLMRequest, Specification, UserInput
@@ -435,7 +436,7 @@ class ProjectState(Base):
 
         return 1
 
-    def get_steps_of_type(self, step_type: str) -> [dict]:
+    def get_steps_of_type(self, step_type: str) -> List[dict]:
         """
         Get list of unfinished steps with specific type.
 
